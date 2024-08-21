@@ -1,5 +1,6 @@
 {
   "name": "front_end",
+  "proxy": "http://192.168.0.167:8000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,9 +11,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
+    "react-router-bootstrap": "^0.26.3",
+    "react-router-dom": "^6.26.1",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
