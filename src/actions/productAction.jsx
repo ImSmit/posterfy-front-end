@@ -15,14 +15,13 @@ export const listProducts = () => async (dispatch) => {
     try{
         dispatch({ type: PRODUCT_LIST_REQUEST })
         let { data } = await axios.get("http://192.168.0.167:8000/api/products/")
-        console.log("action",data);
         
         dispatch({ 
             type: PRODUCT_LIST_SUCCESS, 
             payload: data 
         })
     }catch(error){
-        console.log("Erropr ", error);
+        console.log("ERROR :: ", error);
         dispatch({
             type: PRODUCT_LIST_FAIL,
             payload: error.response && error.response.data.message

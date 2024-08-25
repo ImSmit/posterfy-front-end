@@ -15,9 +15,9 @@ export default function ProductScreen() {
     const { id } = useParams()
     const navigate = useNavigate()
     const productObj = useSelector(state => state.product);
-
+    console.log("productObj ::", productObj);
+    
     const {isError, isLoading, product, errorMessage} = productObj
-    console.log("data :: ", product);
     
     const dispatch = useDispatch();
 

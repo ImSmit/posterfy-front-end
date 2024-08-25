@@ -3,8 +3,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchProduct = createAsyncThunk("fetchProduct", async (id) => {
-    const response = await axios.get(`http://192.168.0.167:8000/api/product/${id}`)
-    return response.data.data;
+    console.log("====> fetchProduct called");
+    
+    const response = await axios.get(`http://192.168.0.167:8000/api/products/${id}`)
+    return response.data.data;  
 })
 
 const initialState = {
@@ -13,25 +15,31 @@ const initialState = {
     isError: true,
     errorMessage: null
 } 
-const producSlice = createSlice({
+// Dont use same name as file it will call every time this function
+const product_slice = createSlice({
     name:'product',
     initialState,
-    extraReducers: (builder) => {
-        builder.addCase(fetchProduct.pending, (state) => {
+    reducers: {},
+    extraReducers: builder => {
+        
+        builder.addCase(fetchProduct.pending, (state) => {            
             state.isLoading = true;
-        })
+        });
+
         builder.addCase(fetchProduct.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.isLoading = false;
             state.isError = false;
             state.product = action.payload;
         });
+
         builder.addCase(fetchProduct.rejected, (state, action) => {
-            console.log("ERROR ::", action.error.message);
             state.isLoading = false;
             state.isError = true;
             state.errorMessage = action.error.message
-        })
+        });
+
     }
 })
 
-export default producSlice.reducer;
+export default product_slice.reducer;

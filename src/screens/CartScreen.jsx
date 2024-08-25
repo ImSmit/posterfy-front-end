@@ -16,14 +16,12 @@ export default function CartScreen() {
   
   const dispatch = useDispatch();
   const cartItemsReducer = useSelector(state => state.cart);
-  cartItems = cartItemsReducer.cartItems
-  console.log("cart Items", cartItems.length);
-  
+  cartItems = cartItemsReducer.cartItems  
   
   useEffect(() => {
     if (id){
       async function getProduct(id){
-        const response = await axios.get(`http://192.168.0.167:8000/api/product/${id}`)
+        const response = await axios.get(`http://192.168.0.167:8000/api/products/${id}`)
         const prodData = {
           name: response.data.data.name, 
           image: response.data.data.image, 
@@ -32,14 +30,13 @@ export default function CartScreen() {
           countInStock: response.data.data.countInStock,
           qty: quantity
         }
-        console.log(prodData);
         dispatch(addToCart(prodData))
         // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
         return response
       }
       getProduct(id)
     }else{
-      console.log("no id");
+      console.log("ERROR :: no id");
     }
   }, [dispatch])
 

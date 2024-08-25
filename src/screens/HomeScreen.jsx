@@ -7,10 +7,9 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 
 export default function HomeScreen() {
-  const productList = useSelector(state => state.productList);
-  console.log(productList);
+  const productListObj = useSelector(state => state.productList);
   
-  const {isError, isLoading, products, errorMessage} = productList
+  const {isError, isLoading, products, errorMessage} = productListObj
   
   const dispatch = useDispatch()
 
@@ -34,7 +33,6 @@ export default function HomeScreen() {
           }
         </Row>
       }
-      
     </div>
   )
 }
