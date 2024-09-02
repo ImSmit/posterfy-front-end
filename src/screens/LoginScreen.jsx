@@ -4,32 +4,34 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FromContainer from '../components/FromContainer'
 import { useSearchParams } from 'react-router-dom';
-import { userLoginAPI } from '../reducers/users/userSlice'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { useUserLoginAPIMutation } from '../reducers/users/api'
+import { loginSuccess } from '../reducers/users/userSlice'
 
 export default function LoginScreen() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const userInfo = useSelector(state => state.user)
 
+    const [userLoginAPI, {isLoading, error, isError}] = useUserLoginAPIMutation()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [ searchParams ] = useSearchParams()
-    
+
+    const errorMessage = isError ? error.data.detail : null
     const redirect = searchParams.get('redirect') ? searchParams.get('redirect') : "/"
-    const userInfo = useSelector(state => state.userLogin)
-    
-    const {isLoggedIn, isLoading, isError, product_data, errorMessage} = userInfo
-    
+
     useEffect(() => {      
         if(userInfo.isLoggedIn){
             navigate(redirect)
         }
     }, [redirect, userInfo, history])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        dispatch(userLoginAPI({email, password}))
+        const result = await userLoginAPI({username:email, password}).unwrap()        
+        dispatch(loginSuccess(result))
     }
 
     return (
@@ -66,10 +68,8 @@ export default function LoginScreen() {
                 </Col>
             </Row>
             {isError && <Message variant={ "danger" } errorMessage={errorMessage} />}
-        </FromContainer>
+            </FromContainer>
         }
         </>
-        
-        
     )
 }

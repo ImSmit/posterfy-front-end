@@ -9,27 +9,21 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { fetchProduct } from "../reducers/products/productSlice"
 import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap";
+import { useGetProductQuery } from "../reducers/products/api";
 
 export default function ProductScreen() {
     const [qty, setQty] = useState(1)
     const { id } = useParams()
     const navigate = useNavigate()
-    const productObj = useSelector(state => state.product);
-    console.log("productObj ::", productObj);
     
-    const {isError, isLoading, product, errorMessage} = productObj
+    const {data, error,isError, isLoading} = useGetProductQuery(id)
+    const product = isLoading ? null : isError ? null : data.data 
     
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(fetchProduct(id))
-    }, [dispatch])
-    
+    const errorMessage = isError ? error.data.detail : null 
+  
     const addToCartHandler = () => {
       navigate(`/cart/${id}?qty=${qty}`)
     }
-    // const product = products.find((p) => p._id == id)
-    // console.log(product);
     
     return (
       <>

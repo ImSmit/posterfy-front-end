@@ -9,7 +9,8 @@ import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { store } from "./store.js"
-import Register from "./screens/Register.jsx"
+import RegisterScreen from "./screens/RegisterScreen.jsx"
+import ProfileScreen from "./screens/ProfileScreen.jsx"
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       {path:"/product/:id", element:<ProductScreen />},
       {path:"/cart/:id?", element:<CartScreen />}, // ? : means id is optional
       {path:"/login", element:<LoginScreen />},
-      {path:"/register", element:<Register />},
+      {path:"/register", element:<RegisterScreen />},
+      {path:"/profile", element:<ProfileScreen />},
     ]
   }
 ]);

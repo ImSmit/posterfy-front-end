@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchProducts } from "../reducers/products/productsSlice"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
+import { useGetProductsQuery } from "../reducers/products/api"
 
 export default function HomeScreen() {
-  const productListObj = useSelector(state => state.productList);
-  
-  const {isError, isLoading, products, errorMessage} = productListObj
-  
+  const { data, error, isError, isLoading } = useGetProductsQuery()
+  const errorMessage = isError? error.data.detail: null
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -22,10 +21,10 @@ export default function HomeScreen() {
       <h1>Home Screen</h1>
       {
           isLoading ? <Loader />
-          : isError ? <Message variant={ "danger" } errorMessage={errorMessage}/>
+          : error ? <Message variant={ "danger" } errorMessage={errorMessage}/>
           : <Row className="m-0">
           {
-              products.map((product) => 
+              data.map((product) => 
                   <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
                       <Product product={product} />
                   </Col>

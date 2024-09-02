@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap"
 import { logOut } from "../reducers/users/userSlice"
 
 export default function Header() {
-  const userObj = useSelector(state => state.userLogin)
+  const userObj = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { userInfo } = userObj
   console.log(userInfo);
@@ -13,7 +13,6 @@ export default function Header() {
   const logoutHandler = () => {
     dispatch(logOut())
   }
-  
 
   return (
   <header>
