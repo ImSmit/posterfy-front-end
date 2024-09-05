@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, removeFromCart } from "../reducers/cart/cartSlice"
-import { Row, Col, ListGroup, Button, Image, Form } from "react-bootstrap";
+import { Row, Col, ListGroup, Button, Image, Form, Card } from "react-bootstrap";
 import { useSearchParams } from 'react-router-dom';
 import Message from '../components/Message'
 import { Link } from "react-router-dom";
@@ -40,7 +40,7 @@ export default function CartScreen() {
     }
   }, [dispatch])
 
-  const handleQtyChange = (item, q) => {
+  const handleQtyChange = (item, q) => {    
     item = {...item, qty: q}
     dispatch(addToCart(item))    
   }
@@ -66,13 +66,13 @@ export default function CartScreen() {
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
                     <Col md={2}>
-                      ${item.price}
+                      ${Number(item.price)}
                     </Col>
                     <Col md={3}>
                     <Form.Control 
                               as="select"
                               value={item.qty}
-                              onChange={(e) => handleQtyChange(item, e.target.value)}
+                              onChange={(e) => handleQtyChange(item, Number(e.target.value))}
                               >
                                 {
                                   [...Array(item.countInStock).keys()].map((x) => (
@@ -90,7 +90,16 @@ export default function CartScreen() {
             </ListGroup>
           }
       </Col>
-      <Col></Col>
+      <Col md={4}>
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Subtotal ({cartItems.reduce((curr, item) => curr + item.qty, 0 )}) items</h2>
+                Price: { cartItems.reduce((curr, item) => curr + item.qty * Number(item.price), 0).toFixed(2) }
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+      </Col>
     </Row>
   )
 }

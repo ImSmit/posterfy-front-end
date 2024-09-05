@@ -9,6 +9,8 @@ import { useGetProductsQuery } from "../reducers/products/api"
 
 export default function HomeScreen() {
   const { data, error, isError, isLoading } = useGetProductsQuery()
+  console.log("error :: ", error);
+  
   const errorMessage = isError? error.data.detail: null
   const dispatch = useDispatch()
 
@@ -25,7 +27,7 @@ export default function HomeScreen() {
           : <Row className="m-0">
           {
               data.map((product) => 
-                  <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                  <Col sm={6} md={4} lg={4} xl={3} key={product._id}>
                       <Product product={product} />
                   </Col>
               )

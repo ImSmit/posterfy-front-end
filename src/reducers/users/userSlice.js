@@ -22,6 +22,7 @@ const userSlice = createSlice({
             localStorage.removeItem("user_info")
             state.isLoggedIn = false;
             state.userInfo = null;
+            state.userDetail = null
         },
         loginSuccess: (state, action) => {
             console.log("action payload from login", action.payload);
