@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { store } from "./store.js"
 import RegisterScreen from "./screens/RegisterScreen.jsx"
 import ProfileScreen from "./screens/ProfileScreen.jsx"
+import ShippingScreen from "./screens/ShippingScreen.jsx"
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       {path:"/login", element:<LoginScreen />},
       {path:"/register", element:<RegisterScreen />},
       {path:"/profile", element:<ProfileScreen />},
+      {path:"/shipping", element:<ShippingScreen />},
     ]
   }
 ]);

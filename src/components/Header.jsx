@@ -3,6 +3,7 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { LinkContainer } from "react-router-bootstrap"
 import { logOut } from "../reducers/users/userSlice"
+import "./components.css"
 
 export default function Header() {
   const userObj = useSelector(state => state.user)
@@ -16,7 +17,7 @@ export default function Header() {
 
   return (
   <header>
-    <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+    <Navbar className="main-header" bg="primary" variant="dark" expand="lg" collapseOnSelect>
       <Container>
         <LinkContainer to="/">
           <Navbar.Brand href="/">PosterFy</Navbar.Brand>

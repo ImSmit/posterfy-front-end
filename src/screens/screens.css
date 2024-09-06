@@ -1,0 +1,8 @@
+.proceed-area {
+    display: flex;
+    justify-content: center;
+}
+
+.proceed-area button {
+    width: 100%;
+}

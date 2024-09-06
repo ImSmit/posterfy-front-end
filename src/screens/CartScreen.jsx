@@ -4,16 +4,17 @@ import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, removeFromCart } from "../reducers/cart/cartSlice"
 import { Row, Col, ListGroup, Button, Image, Form, Card } from "react-bootstrap";
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import Message from '../components/Message'
 import { Link } from "react-router-dom";
+import './screens.css'
 
 export default function CartScreen() {
   let cartItems = []
   const { id } = useParams()
   const [searchParams] = useSearchParams();
   const quantity = searchParams.get('qty')
-  
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const cartItemsReducer = useSelector(state => state.cart);
   cartItems = cartItemsReducer.cartItems  
@@ -48,6 +49,10 @@ export default function CartScreen() {
   const handleRemove = (id) => {        
     dispatch(removeFromCart(id))
   } 
+
+  const handleProceed = () => {
+    navigate(`/shipping`)
+  }
 
   return (
     <Row>
@@ -97,7 +102,16 @@ export default function CartScreen() {
                 <h2>Subtotal ({cartItems.reduce((curr, item) => curr + item.qty, 0 )}) items</h2>
                 Price: { cartItems.reduce((curr, item) => curr + item.qty * Number(item.price), 0).toFixed(2) }
               </ListGroup.Item>
+              
             </ListGroup>
+            <ListGroup.Item className="proceed-area">
+                <Button
+                type="button"
+                className="btn-block m-2"
+                disabled= {cartItems.length > 0 ? false : true}
+                onClick={handleProceed}>PROCEED TO CHECKOUT
+                </Button>
+              </ListGroup.Item>
           </Card>
       </Col>
     </Row>
