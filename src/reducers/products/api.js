@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const productsAPI = createApi({
     reducerPath: 'productsAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.0.167:8000/api/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://imsmit.pythonanywhere.com/api/' }),
     endpoints: (builder) => ({
       getProducts: builder.query({
         query: () => `products`,

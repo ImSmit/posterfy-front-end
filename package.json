@@ -1,6 +1,6 @@
 {
   "name": "front_end",
-  "proxy": "http://192.168.0.167:8000",
+  "proxy": "https://imsmit.pythonanywhere.com/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

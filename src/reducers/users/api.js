@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const usersAPI = createApi({
     reducerPath: 'usersAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.0.167:8000/api/users/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://imsmit.pythonanywhere.com/api/users/' }),
     endpoints: (builder) => ({
       userLoginAPI: builder.mutation({
         query: (credentials) => ({

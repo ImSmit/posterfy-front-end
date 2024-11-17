@@ -6,7 +6,7 @@ import { PRODUCT_LIST_REQUEST,
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchData = createAsyncThunk('data/fetchData', async () => {
-    const response = await fetch('http://192.168.0.167:8000/api/products/');
+    const response = await fetch('https://imsmit.pythonanywhere.com/api/products/');
     const data = await response.json();
     return data;
 });
@@ -14,7 +14,7 @@ export const fetchData = createAsyncThunk('data/fetchData', async () => {
 export const listProducts = () => async (dispatch) => {   
     try{
         dispatch({ type: PRODUCT_LIST_REQUEST })
-        let { data } = await axios.get("http://192.168.0.167:8000/api/products/")
+        let { data } = await axios.get("https://imsmit.pythonanywhere.com/api/products/")
         
         dispatch({ 
             type: PRODUCT_LIST_SUCCESS, 

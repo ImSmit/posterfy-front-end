@@ -22,7 +22,7 @@ export default function CartScreen() {
   useEffect(() => {
     if (id){
       async function getProduct(id){
-        const response = await axios.get(`http://192.168.0.167:8000/api/products/${id}`)
+        const response = await axios.get(`https://imsmit.pythonanywhere.com/api/products/${id}`)
         const prodData = {
           name: response.data.data.name, 
           image: response.data.data.image, 

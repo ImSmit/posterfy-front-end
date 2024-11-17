@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchProducts = createAsyncThunk("fetchProducts", async () => {    
-    const response = await axios.get("http://192.168.0.167:8000/api/products/")
+    const response = await axios.get("https://imsmit.pythonanywhere.com/api/products/")
     return response.data;
 })
 
