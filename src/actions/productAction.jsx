@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { PRODUCT_LIST_REQUEST, 
          PRODUCT_LIST_SUCCESS, 
@@ -6,7 +5,10 @@ import { PRODUCT_LIST_REQUEST,
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchData = createAsyncThunk('data/fetchData', async () => {
-    const response = await fetch('https://imsmit.pythonanywhere.com/api/products/');
+    const response = await fetch('https://imsmit.pythonanywhere.com/api/products', {
+        method: 'GET',
+        mode: 'no-cors',
+    });
     const data = await response.json();
     return data;
 });
