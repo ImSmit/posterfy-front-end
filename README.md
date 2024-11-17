@@ -1,1 +1,1 @@
-# [Posterfy](https://posterfy.netlify.app/)
+# [www.posterfy.app](https://posterfy.netlify.app/)
